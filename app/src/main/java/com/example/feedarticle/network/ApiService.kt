@@ -1,5 +1,6 @@
 package com.example.feedarticle
 
+import com.example.feedarticle.network.ApiInterface
 import com.example.feedarticle.network.ApiRoutes
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -28,6 +29,6 @@ object ApiService {
             .build()
     }
 
-    //fun getApi() = getClient().create(ApiInterface::class.java)
+    fun getApi() = getClient().create(ApiInterface::class.java)
 }
 
