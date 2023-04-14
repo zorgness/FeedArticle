@@ -14,4 +14,6 @@
     <string name="add_new_article">add new article</string>
     <string name="welcome">Welcome</string>
     <string name="logout">logout</string>
+    <string name="edit">edit</string>
+    <string name="delete">delete</string>
 </resources>
