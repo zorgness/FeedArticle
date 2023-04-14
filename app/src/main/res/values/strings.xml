@@ -16,4 +16,8 @@
     <string name="logout">logout</string>
     <string name="edit">edit</string>
     <string name="delete">delete</string>
+    <string name="new_article">New article</string>
+    <string name="article_preview">article_preview</string>
+    <string name="url_image">url image</string>
+    <string name="article_title">article title</string>
 </resources>

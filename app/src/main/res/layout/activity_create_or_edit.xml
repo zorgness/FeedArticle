@@ -6,4 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".CreateOrEditActivity">
 
+
+        <TextView
+            android:id="@+id/tv_title_new_edit_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/new_article"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+       <!-- <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_article_img_preview"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:contentDescription="@string/article_preview"
+            android:scaleType="centerCrop"
+            android:src="@color/design_default_color_background"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+
+            app:layout_constraintStart_toEndOf="@+id/et_article_form_url"
+            app:layout_constraintTop_toTopOf="@+id/et_article_form_url"
+            tools:srcCompat="@tools:sample/avatars" />-->
+
+        <EditText
+            android:id="@+id/et_article_form_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/url_image"
+            android:inputType="textUri"
+            app:layout_constraintBottom_toTopOf="@+id/et_country_form_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_new_edit_activity" />
+
+
+        <EditText
+            android:id="@+id/et_country_form_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/article_title"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/button_country_form_activity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_new_edit_activity" />
+
+        <Button
+            android:id="@+id/button_country_form_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:text="@string/submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_new_edit_activity" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
