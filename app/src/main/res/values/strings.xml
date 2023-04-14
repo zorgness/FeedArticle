@@ -3,13 +3,12 @@
     <string name="feed_article">FEED ARTICLE</string>
     <string name="login">Login</string>
     <string name="login_label">login</string>
-    <string name="entrez_votre_login">entrez votre login</string>
-    <string name="entrez_votre_mot_de_passe">entrez votre mot de passe</string>
+    <string name="enter_your_login">enter your login</string>
+    <string name="enter_your_password">enter your password</string>
     <string name="password">password</string>
     <string name="submit">Submit</string>
     <string name="no_account_yet_register_here">no account yet, register here</string>
     <string name="register">Register</string>
-    <string name="confirmer_votre_mot_de_passe">confirmer votre_mot_de_passe</string>
     <string name="confirm_password">confirm password</string>
     <string name="add_new_article">add new article</string>
     <string name="welcome">Welcome</string>
@@ -20,4 +19,5 @@
     <string name="article_preview">article_preview</string>
     <string name="url_image">url image</string>
     <string name="article_title">article title</string>
+    <string name="article_description">article description</string>
 </resources>

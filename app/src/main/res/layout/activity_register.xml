@@ -8,6 +8,7 @@
     tools:context=".RegisterActivity">
 
 
+
     <TextView
         android:id="@+id/tv_title_register_activity"
         android:layout_width="wrap_content"
@@ -48,7 +49,7 @@
             android:autofillHints=""
             android:background="@drawable/edit_text_background"
             android:ems="10"
-            android:hint="@string/entrez_votre_login"
+            android:hint="@string/enter_your_login"
             android:inputType="textPersonName"
             android:padding="16dp"
             android:textSize="14sp" />
@@ -70,7 +71,7 @@
             android:autofillHints=""
             android:background="@drawable/edit_text_background"
             android:ems="10"
-            android:hint="@string/entrez_votre_mot_de_passe"
+            android:hint="@string/enter_your_password"
             android:inputType="textPassword"
             android:padding="16dp"
             android:textSize="14sp" />
@@ -92,7 +93,7 @@
             android:autofillHints=""
             android:background="@drawable/edit_text_background"
             android:ems="10"
-            android:hint="@string/confirmer_votre_mot_de_passe"
+            android:hint="@string/confirm_password"
             android:inputType="textPassword"
             android:padding="16dp"
             android:textSize="14sp" />

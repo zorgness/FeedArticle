@@ -50,7 +50,7 @@
             android:padding="16dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="@string/entrez_votre_login"
+            android:hint="@string/enter_your_login"
             android:autofillHints=""
             android:background="@drawable/edit_text_background"/>
 
@@ -72,7 +72,7 @@
             android:padding="16dp"
             android:ems="10"
             android:inputType="textPassword"
-            android:hint="@string/entrez_votre_mot_de_passe"
+            android:hint="@string/enter_your_password"
             android:autofillHints=""
             android:background="@drawable/edit_text_background"/>
 
