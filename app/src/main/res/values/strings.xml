@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">FeedArticle</string>
+    <string name="feed_article">FEED ARTICLE</string>
+    <string name="login">Login</string>
+    <string name="login_label">login</string>
+    <string name="entrez_votre_login">entrez votre login</string>
+    <string name="entrez_votre_mot_de_passe">entrez votre mot de passe</string>
+    <string name="password">password</string>
+    <string name="submit">Submit</string>
+    <string name="no_account_yet_register_here">no account yet, register here</string>
+    <string name="register">Register</string>
+    <string name="confirmer_votre_mot_de_passe">confirmer votre_mot_de_passe</string>
+    <string name="confirm_password">confirm password</string>
+</resources>

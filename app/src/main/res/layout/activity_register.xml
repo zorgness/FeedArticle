@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4CAF50"
+    tools:context=".RegisterActivity">
+
+
+    <TextView
+        android:id="@+id/tv_title_register_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout_login_activity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="34dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_register_activity">
+
+        <TextView
+            android:id="@+id/tv_login_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_label"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_user_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints=""
+            android:background="@drawable/edit_text_background"
+            android:ems="10"
+            android:hint="@string/entrez_votre_login"
+            android:inputType="textPersonName"
+            android:padding="16dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_password_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/password"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_user_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints=""
+            android:background="@drawable/edit_text_background"
+            android:ems="10"
+            android:hint="@string/entrez_votre_mot_de_passe"
+            android:inputType="textPassword"
+            android:padding="16dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_password_confirm_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/confirm_password"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_user_password_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints=""
+            android:background="@drawable/edit_text_background"
+            android:ems="10"
+            android:hint="@string/confirmer_votre_mot_de_passe"
+            android:inputType="textPassword"
+            android:padding="16dp"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_submit_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/submit" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
