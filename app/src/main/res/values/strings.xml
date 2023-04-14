@@ -11,4 +11,7 @@
     <string name="register">Register</string>
     <string name="confirmer_votre_mot_de_passe">confirmer votre_mot_de_passe</string>
     <string name="confirm_password">confirm password</string>
+    <string name="add_new_article">add new article</string>
+    <string name="welcome">Welcome</string>
+    <string name="logout">logout</string>
 </resources>
