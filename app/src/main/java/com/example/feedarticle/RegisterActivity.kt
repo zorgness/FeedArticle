@@ -1,6 +1,6 @@
 package com.example.feedarticle
 
-import SHAREDPREF_LOGIN_TOKEN
+import SHAREDPREF_SESSION
 import SHAREDPREF_NAME
 import android.content.Context
 import android.content.Intent
@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import com.example.feedarticle.dataclass.SessionDto
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import register
 
 class RegisterActivity : AppCompatActivity() {
@@ -30,10 +33,10 @@ class RegisterActivity : AppCompatActivity() {
             if(login.isNotBlank() && password.isNotBlank()) {
                 if(validatePassword(password, confirm)) {
                     register(login, password, loginCallback = {
-                        with(it.token) {
+                        with(it) {
                             applicationContext.getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE)
                                 .edit()
-                                .putString(SHAREDPREF_LOGIN_TOKEN, this)
+                                .putString(SHAREDPREF_SESSION, convertDtoToJsonStr(this))
                                 .apply()
                             startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                             finish()
@@ -50,5 +53,11 @@ class RegisterActivity : AppCompatActivity() {
     }
     private fun validatePassword(password: String, confirm: String): Boolean {
         return password == confirm
+    }
+
+    fun convertDtoToJsonStr(session: SessionDto): String {
+        val gson = Gson()
+        val gsonPretty = GsonBuilder().setPrettyPrinting().create()
+        return gson.toJson(session)
     }
 }

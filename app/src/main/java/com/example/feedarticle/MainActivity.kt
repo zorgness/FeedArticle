@@ -1,6 +1,6 @@
 package com.example.feedarticle
 
-import SHAREDPREF_LOGIN_TOKEN
+import SHAREDPREF_SESSION
 import SHAREDPREF_NAME
 import android.content.Context
 import android.content.Intent
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         with(applicationContext.getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE)) {
             findViewById<Button>(R.id.btn_logout).setOnClickListener {
-                edit().remove(SHAREDPREF_LOGIN_TOKEN).apply()
+                edit().remove(SHAREDPREF_SESSION).apply()
                 startActivity(Intent(this@MainActivity, LoginActivity::class.java))
                 finish()
             }

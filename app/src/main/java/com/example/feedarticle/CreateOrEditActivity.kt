@@ -1,12 +1,18 @@
 package com.example.feedarticle
 
-import android.media.Image
+import SHAREDPREF_NAME
+import SHAREDPREF_SESSION
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import com.example.feedarticle.dataclass.CreaArticleDto
+import com.example.feedarticle.dataclass.SessionDto
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import insertArticle
@@ -21,6 +27,21 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         val etDescription = findViewById<EditText>(R.id.et_article_description)
         val spinnerCategory = findViewById<Spinner>(R.id.spinner_category_form)
         val civImgPrev = findViewById<CircleImageView>(R.id.civ_article_img_preview)
+
+
+        var session: SessionDto? = convertJsonToDto(
+            applicationContext
+                .getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE)
+                .getString(SHAREDPREF_SESSION, null)
+
+        )
+
+
+
+        session?.let {
+            Log.i("session", session.token)
+        }
+
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
@@ -59,18 +80,43 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             val urlImg = etUrlImg.text.toString()
             val title = etTitle.text.toString()
             val description = etDescription.text.toString()
-            val idCategory = spinnerCategory.selectedItemId
+            val idCategory = spinnerCategory.selectedItemId.toInt()
 
-            println("trololol "+idCategory)
+            if (urlImg.isNotBlank() && title.isNotBlank() && description.isNotBlank()) {
 
-            if(urlImg.isNotBlank() && title.isNotBlank() && description.isNotBlank()) {
+                if (session != null) {
+                    insertArticle(
+                        CreaArticleDto(
+                            session.id,
+                            title,
+                            description,
+                            urlImg,
+                            idCategory,
+                            session.token
+                        )
+                    ,articleDtoCallback = {
+                        //toast user if successful
 
-                //insertArticle(CreaArticleDto())
+
+                        }
+                    )
+
+                    Toast.makeText(this@CreateOrEditActivity, "success", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@CreateOrEditActivity,MainActivity::class.java))
+                    finish()
+                }
 
             } else {
                 //ERROR
             }
 
+        }
+    }
+
+    fun convertJsonToDto(jsonStr: String?): SessionDto? {
+        return jsonStr?.let {
+            Moshi.Builder().addLast(KotlinJsonAdapterFactory())
+                .build().adapter(SessionDto::class.java).fromJson(it)
         }
     }
 

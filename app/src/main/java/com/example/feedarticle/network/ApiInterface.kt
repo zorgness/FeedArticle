@@ -8,11 +8,11 @@ interface ApiInterface {
 
     @FormUrlEncoded
     @POST(ApiRoutes.REGISTER)
-    fun register(@Field("login") login: String, @Field("mdp") mdp: String): Call<LoginDto>?
+    fun register(@Field("login") login: String, @Field("mdp") mdp: String): Call<SessionDto>?
 
     @FormUrlEncoded
     @POST(ApiRoutes.LOGIN)
-    fun login(@Field("login") login: String, @Field("mdp") mdp: String): Call<LoginDto>?
+    fun login(@Field("login") login: String, @Field("mdp") mdp: String): Call<SessionDto>?
 
     @GET(ApiRoutes.ARTICLES)
     fun getAllArticles(@Query("token") token: String): Call<GetArticlesDto>?

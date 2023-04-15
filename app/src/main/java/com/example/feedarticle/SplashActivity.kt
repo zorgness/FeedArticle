@@ -1,12 +1,16 @@
 package com.example.feedarticle
 
-import SHAREDPREF_LOGIN_TOKEN
+import SHAREDPREF_SESSION
 import SHAREDPREF_NAME
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.feedarticle.dataclass.SessionDto
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.squareup.moshi.Json
 
 
 class SplashActivity : AppCompatActivity() {
@@ -19,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
             applicationContext.getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE).apply {
 
                 (
-                        getString(SHAREDPREF_LOGIN_TOKEN, null)
+                        getString(SHAREDPREF_SESSION, null)
                             ?.run {
                                 MainActivity::class.java
                             }
@@ -35,4 +39,7 @@ class SplashActivity : AppCompatActivity() {
         }, 2000)
 
     }
+
+
+
 }

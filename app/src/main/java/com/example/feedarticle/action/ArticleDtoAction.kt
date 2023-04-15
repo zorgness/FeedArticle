@@ -15,7 +15,7 @@ fun getRemoteArticles(token: String, articleDtoCallback: (List<ArticleDto>) -> U
         }
 
         override fun onFailure(call: Call<GetArticlesDto>, t: Throwable) {
-            TODO("Not yet implemented")
+            //TODO("Not yet implemented")
         }
 
     })
@@ -32,7 +32,7 @@ fun getArticle(id: Long, token: String, articleDtoCallback: (ArticleDto?) -> Uni
         }
 
         override fun onFailure(call: Call<GetArticleDto>, t: Throwable) {
-            TODO("Not yet implemented")
+            //TODO("Not yet implemented")
         }
     })
 }
@@ -43,12 +43,13 @@ fun insertArticle(newArticle: CreaArticleDto, articleDtoCallback: (ReturnDto?) -
     call?.enqueue(object : Callback<ReturnDto> {
         override fun onResponse(call: Call<ReturnDto>, response: Response<ReturnDto>) {
             response.body()?.let {
-                articleDtoCallback.invoke(it)
+
+                    articleDtoCallback.invoke(it)
             }
         }
 
         override fun onFailure(call: Call<ReturnDto>, t: Throwable) {
-            TODO("Not yet implemented")
+            //TODO("Not yet implemented")
         }
 
     })
@@ -65,7 +66,7 @@ fun updateArticle(updatedArticle: UpdateArticleDto, articleDtoCallback: (ReturnD
         }
 
         override fun onFailure(call: Call<ReturnDto>, t: Throwable) {
-            TODO("Not yet implemented")
+            //TODO("Not yet implemented")
         }
 
     })
@@ -82,7 +83,7 @@ fun deleteArticle(idArticle: Long,token: String, articleDtoCallback: (ReturnDto?
         }
 
         override fun onFailure(call: Call<ReturnDto>, t: Throwable) {
-            TODO("Not yet implemented")
+            //TODO("Not yet implemented")
         }
 
     })
