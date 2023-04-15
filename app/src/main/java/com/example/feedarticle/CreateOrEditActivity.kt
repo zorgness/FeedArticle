@@ -37,7 +37,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         )
 
 
-
+        //debug
         session?.let {
             Log.i("session", session.token)
         }
@@ -93,14 +93,14 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                             urlImg,
                             idCategory,
                             session.token
-                        )
-                    ,articleDtoCallback = {
+                        ), articleDtoCallback = {
                         //toast user if successful
 
 
                         }
                     )
 
+                    //
                     Toast.makeText(this@CreateOrEditActivity, "success", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@CreateOrEditActivity,MainActivity::class.java))
                     finish()

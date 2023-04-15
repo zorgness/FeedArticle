@@ -46,10 +46,24 @@
             android:maxLines="1"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_category_item_rv_article"
             app:layout_constraintStart_toEndOf="@+id/civ_image_item_rv_article"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="test" />
+
+        <TextView
+            android:id="@+id/tv_category_item_rv_article"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
+            android:fontFamily="serif-monospace"
+            android:maxLines="1"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_name_item_rv_article"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="test2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
