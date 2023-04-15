@@ -22,5 +22,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+        findViewById<Button>(R.id.btn_new_article).setOnClickListener {
+            startActivity(Intent(this@MainActivity, CreateOrEditActivity::class.java))
+            finish()
+        }
+
     }
 }

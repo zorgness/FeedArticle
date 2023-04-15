@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="selected_item">Selected item:</string>
+    <string-array name="categories">
+        <item>Sport</item>
+        <item>Manga</item>
+        <item>Divers</item>
+
+    </string-array>
+</resources>
