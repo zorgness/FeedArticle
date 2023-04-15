@@ -1,10 +1,14 @@
 package com.example.feedarticle
 
+import android.content.Intent
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedarticle.dataclass.ArticleDto
 import com.squareup.picasso.Picasso
@@ -44,6 +48,10 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
                    .resize(300, 300)
                    .into(civImg)
                 }
+
+                articleCard.setOnClickListener {
+                    onShowItemCallback?.invoke(article)
+                }
             }
         }
     }
@@ -56,6 +64,7 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
 
     inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        val articleCard = itemView.findViewById<CardView>(R.id.card_article)
         val tvTitle = itemView.findViewById<TextView>(R.id.tv_name_item_rv_article)
         val tvCategory = itemView.findViewById<TextView>(R.id.tv_category_item_rv_article)
         val civImg = itemView.findViewById<CircleImageView>(R.id.civ_image_item_rv_article)

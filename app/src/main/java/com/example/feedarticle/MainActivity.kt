@@ -44,6 +44,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        articleAdapter.onShowItemCallback = {
+            //
+            startActivity(Intent(this, DetailsActivity::class.java))
+            finish()
+        }
+
         with(applicationContext.getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE)) {
             findViewById<Button>(R.id.btn_logout).setOnClickListener {
                 edit().remove(SHAREDPREF_SESSION).apply()
