@@ -28,37 +28,37 @@
             app:civ_border_color="#FF000000"
             app:civ_border_width="2dp"
 
-            app:layout_constraintStart_toEndOf="@+id/et_article_form_url"
-            app:layout_constraintTop_toTopOf="@+id/et_article_form_url"
+            app:layout_constraintStart_toEndOf="@+id/et_article_url_img"
+            app:layout_constraintTop_toTopOf="@+id/et_article_url_img"
             tools:srcCompat="@tools:sample/avatars" />
 
         <EditText
-            android:id="@+id/et_article_form_url"
+            android:id="@+id/et_article_url_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/url_image"
             android:inputType="textUri"
-            app:layout_constraintBottom_toTopOf="@+id/et_article_form_title"
+            app:layout_constraintBottom_toTopOf="@+id/et_article_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_new_edit_activity" />
 
 
         <EditText
-            android:id="@+id/et_article_form_title"
+            android:id="@+id/et_article_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/article_title"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/et_article_form_description"
+            app:layout_constraintBottom_toTopOf="@+id/et_article_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_article_form_url" />
+            app:layout_constraintTop_toBottomOf="@+id/et_article_url_img" />
 
         <EditText
-            android:id="@+id/et_article_form_description"
+            android:id="@+id/et_article_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -67,7 +67,7 @@
             app:layout_constraintBottom_toTopOf="@+id/spinner_category_form"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_article_form_title" />
+            app:layout_constraintTop_toBottomOf="@+id/et_article_title" />
 
         <Spinner
             android:id="@+id/spinner_category_form"
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_article_form_description"
+            app:layout_constraintTop_toBottomOf="@+id/et_article_description"
             app:layout_constraintBottom_toTopOf="@+id/btn_new_edit_article"/>
 
         <Button
