@@ -54,6 +54,7 @@ class DetailsActivity : AppCompatActivity() {
                 }
 
                 findViewById<Button>(R.id.btn_edit_article).setOnClickListener {
+                    ////////////////////////////////
                     startActivity(Intent(this, CreateOrEditActivity::class.java).apply {
                         putExtra(MainActivity.KEY_ARTICLE_ID, article.id.toString())
                     })
@@ -61,9 +62,12 @@ class DetailsActivity : AppCompatActivity() {
                 }
 
                 findViewById<Button>(R.id.btn_delete_article).setOnClickListener {
+
                     deleteArticle(article.id.toLong(), session.token, articleDtoCallback = {
 
                     })
+
+                    ////////////////////////////////
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
@@ -75,7 +79,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
 
-
+////////////////////////////////////////////////////////////////
     fun convertJsonToDto(jsonStr: String?): SessionDto? {
         return jsonStr?.let {
             Moshi.Builder().addLast(KotlinJsonAdapterFactory())

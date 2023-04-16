@@ -76,6 +76,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    ////////////////////////////////////////////////////////////////
     fun convertJsonToDto(jsonStr: String?): SessionDto? {
         return jsonStr?.let {
             Moshi.Builder().addLast(KotlinJsonAdapterFactory())

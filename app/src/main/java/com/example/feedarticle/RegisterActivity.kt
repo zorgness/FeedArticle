@@ -55,6 +55,8 @@ class RegisterActivity : AppCompatActivity() {
         return password == confirm
     }
 
+
+    ////////////////////////////////////////////////////////////////
     fun convertDtoToJsonStr(session: SessionDto): String {
         val gson = Gson()
         val gsonPretty = GsonBuilder().setPrettyPrinting().create()
