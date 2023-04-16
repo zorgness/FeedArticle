@@ -11,12 +11,14 @@ import android.view.View
 import android.widget.*
 import com.example.feedarticle.dataclass.CreaArticleDto
 import com.example.feedarticle.dataclass.SessionDto
+import com.example.feedarticle.dataclass.UpdateArticleDto
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import getArticleById
 import insertArticle
+import updateArticle
 
 class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,8 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         val spinnerCategory = findViewById<Spinner>(R.id.spinner_category_form)
         val civImgPrev = findViewById<CircleImageView>(R.id.civ_article_img_preview)
 
+        var articleId: Int? = null
+
 
         var session: SessionDto? = convertJsonToDto(
             applicationContext
@@ -39,6 +43,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         intent.getStringExtra(MainActivity.KEY_ARTICLE_ID)?.let {
             getArticleById(it.toLong(), session?.token!!, articleDtoCallback = {article->
+                articleId = article?.id
                 etUrlImg.setText(article?.urlImage)
                 etTitle.setText(article?.titre)
                 etDescription.setText(article?.descriptif)
@@ -95,20 +100,39 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             if (urlImg.isNotBlank() && title.isNotBlank() && description.isNotBlank()) {
 
                 if (session != null) {
-                    insertArticle(
-                        CreaArticleDto(
-                            session.id,
-                            title,
-                            description,
-                            urlImg,
-                            idCategory,
-                            session.token
-                        ), articleDtoCallback = {
-                        //toast user if successful
+
+                   if(articleId != null)
+                        updateArticle(
+                            UpdateArticleDto(
+                                articleId!!,
+                                title,
+                                description,
+                                urlImg,
+                                idCategory,
+                                session.token
+                            ), articleDtoCallback = {
+                                //toast user if successful
 
 
-                        }
-                    )
+                            }
+                        ) else
+                        insertArticle(
+                            CreaArticleDto(
+                                session.id,
+                                title,
+                                description,
+                                urlImg,
+                                idCategory,
+                                session.token
+                            ), articleDtoCallback = {
+                                //toast user if successful
+
+
+                            }
+                        )
+
+
+
 
                     //
                     Toast.makeText(this@CreateOrEditActivity, "success", Toast.LENGTH_SHORT).show()

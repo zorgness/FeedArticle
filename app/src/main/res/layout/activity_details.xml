@@ -19,19 +19,14 @@
 
 
         <TextView
-            android:id="@+id/tv_title_article_details"
+            android:id="@+id/tv_category_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="welcome" />
 
 
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/logout" />
+
 
     </LinearLayout>
 
