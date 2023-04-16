@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         articleAdapter.onShowItemCallback = {
             //
             startActivity(Intent(this, DetailsActivity::class.java).apply {
-                putExtra(KEY_ARTICLE_ID,it.id)
+                putExtra(KEY_ARTICLE_ID,it.id.toString())
             })
 
             finish()

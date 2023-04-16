@@ -30,6 +30,7 @@ class DetailsActivity : AppCompatActivity() {
         )
 
         intent.getStringExtra(MainActivity.KEY_ARTICLE_ID)?.let {
+            println(it)
             getArticleById(it.toLong(), session?.token!!, articleDtoCallback = {article->
                 //etUrlImg.setText(article?.urlImage)
                 tvTitle.text = article?.titre
