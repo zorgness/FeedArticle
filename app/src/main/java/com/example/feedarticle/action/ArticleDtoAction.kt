@@ -21,7 +21,7 @@ fun getRemoteArticles(token: String, articleDtoCallback: (List<ArticleDto>) -> U
     })
 }
 
-fun getArticle(id: Long, token: String, articleDtoCallback: (ArticleDto?) -> Unit) {
+fun getArticleById(id: Long, token: String, articleDtoCallback: (ArticleDto?) -> Unit) {
     var call: Call<GetArticleDto>? = ApiService.getApi().getArticle(id, token)
     call?.enqueue(object : Callback<GetArticleDto> {
         override fun onResponse(call: Call<GetArticleDto>, response: Response<GetArticleDto>) {

@@ -17,6 +17,10 @@ import getRemoteArticles
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val KEY_ARTICLE_ID = "key article id"
+    }
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var articleAdapter: ArticleAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +50,10 @@ class MainActivity : AppCompatActivity() {
 
         articleAdapter.onShowItemCallback = {
             //
-            startActivity(Intent(this, DetailsActivity::class.java))
+            startActivity(Intent(this, DetailsActivity::class.java).apply {
+                putExtra(KEY_ARTICLE_ID,it.id)
+            })
+
             finish()
         }
 

@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="titre" />
+            android:text="welcome" />
 
 
         <Button
@@ -48,21 +48,21 @@
         app:layout_constraintTop_toBottomOf="@+id/lin_layout_header">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_title_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textAlignment="center"/>
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/iv_details"
             android:layout_width="300dp"
             android:layout_height="150dp"
             android:layout_marginTop="16dp"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_description_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"

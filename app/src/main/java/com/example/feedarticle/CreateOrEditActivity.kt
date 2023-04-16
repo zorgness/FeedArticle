@@ -15,6 +15,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import getArticleById
 import insertArticle
 
 class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -35,6 +36,15 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                 .getString(SHAREDPREF_SESSION, null)
 
         )
+
+        intent.getStringExtra(MainActivity.KEY_ARTICLE_ID)?.let {
+            getArticleById(it.toLong(), session?.token!!, articleDtoCallback = {article->
+                etUrlImg.setText(article?.urlImage)
+                etTitle.setText(article?.titre)
+                etDescription.setText(article?.descriptif)
+                spinnerCategory.setSelection(article?.categorie!!)
+            })
+        }
 
 
         //debug
