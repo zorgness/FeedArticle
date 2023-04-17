@@ -3,6 +3,7 @@
 
     <string name="selected_item">Selected item:</string>
     <string-array name="categories">
+        <item>Select</item>
         <item>Sport</item>
         <item>Manga</item>
         <item>Divers</item>

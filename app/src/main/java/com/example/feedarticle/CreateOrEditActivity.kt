@@ -47,7 +47,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                 etUrlImg.setText(article?.urlImage)
                 etTitle.setText(article?.titre)
                 etDescription.setText(article?.descriptif)
-                spinnerCategory.setSelection(article?.categorie!!)
+                spinnerCategory.setSelection(article?.categorie!! + 1)
             })
         }
 

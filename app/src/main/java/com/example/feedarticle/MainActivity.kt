@@ -19,7 +19,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import getRemoteArticles
 
 
-class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class MainActivity : AppCompatActivity(){
 
     companion object {
         const val KEY_ARTICLE_ID = "key article id"
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             if (session != null) {
                 getRemoteArticles(session.token){
                     if(spinnerCategory.selectedItemId.toInt() > 0) {
-                        articleAdapter.setArticles(it.filter { el -> el.categorie == spinnerCategory.selectedItemId.toInt() })
+                        articleAdapter.setArticles(it.filter { el -> el.categorie == spinnerCategory.selectedItemId.toInt()})
                     } else
                         articleAdapter.setArticles(it)
                 }
@@ -75,8 +75,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             spinnerCategory.adapter = adapter
             spinnerCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    //refresh()
-                    println("spinnerCategory")
                     refresh()
                 }
 
@@ -126,14 +124,5 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
 
 
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        println("onItemSelected $p2")
-        //refresh()
 
-
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        //TODO("Not yet implemented")
-    }
 }

@@ -36,7 +36,8 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
 
             with(holder) {
                 tvTitle.text = article.urlImage
-                tvCategory.text = getCategoryById(article.categorie)
+                tvCategory.text =  getCategoryById(article.categorie)
+
                 if (article.urlImage.isEmpty()) {
                     Picasso.get()
                         .load(android.R.color.transparent)
