@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity(){
         fun refresh() {
             if (session != null) {
                 getRemoteArticles(session.token){
-                    if(spinnerCategory.selectedItemId.toInt() > 0) {
-                        articleAdapter.setArticles(it.filter { el -> el.categorie == spinnerCategory.selectedItemId.toInt()})
+                    if(spinnerCategory.selectedItemPosition > 0) {
+                        articleAdapter.setArticles(it.filter { el -> el.categorie == spinnerCategory.selectedItemPosition})
                     } else
                         articleAdapter.setArticles(it)
                 }

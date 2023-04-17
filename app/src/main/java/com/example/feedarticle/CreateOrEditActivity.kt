@@ -47,7 +47,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                 etUrlImg.setText(article?.urlImage)
                 etTitle.setText(article?.titre)
                 etDescription.setText(article?.descriptif)
-                spinnerCategory.setSelection(article?.categorie!! + 1)
+                spinnerCategory.setSelection(article?.categorie!! - 1)
             })
         }
 
@@ -61,7 +61,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
             this,
-            R.array.categories,
+            R.array.categories_form,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
@@ -95,7 +95,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             val urlImg = etUrlImg.text.toString()
             val title = etTitle.text.toString()
             val description = etDescription.text.toString()
-            val idCategory = spinnerCategory.selectedItemId.toInt()
+            val idCategory = spinnerCategory.selectedItemId.toInt() + 1
 
             if (urlImg.isNotBlank() && title.isNotBlank() && description.isNotBlank()) {
 

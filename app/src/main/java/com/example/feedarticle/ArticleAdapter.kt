@@ -35,7 +35,7 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
         articles[position].let {article ->
 
             with(holder) {
-                tvTitle.text = article.urlImage
+                tvTitle.text = article.titre
                 tvCategory.text =  getCategoryById(article.categorie)
 
                 if (article.urlImage.isEmpty()) {
@@ -75,8 +75,8 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
     //to change
     fun getCategoryById(id: Int): String {
         when(id) {
-            0 -> "Sport"
-            1 -> "Manga"
+            1 -> "Sport"
+            2 -> "Manga"
             else -> "Divers"
         }.let {
             return it

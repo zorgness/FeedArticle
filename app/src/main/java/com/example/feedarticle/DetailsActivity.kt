@@ -89,8 +89,8 @@ class DetailsActivity : AppCompatActivity() {
 
     fun getCategoryById(id: Int): String {
         when(id) {
-            0 -> "Sport"
-            1 -> "Manga"
+            1 -> "Sport"
+            2 -> "Manga"
             else -> "Divers"
         }.let {
             return it

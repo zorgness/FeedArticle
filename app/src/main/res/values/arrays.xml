@@ -3,10 +3,15 @@
 
     <string name="selected_item">Selected item:</string>
     <string-array name="categories">
-        <item>Select</item>
+        <item>All</item>
         <item>Sport</item>
         <item>Manga</item>
         <item>Divers</item>
+    </string-array>
 
+    <string-array name="categories_form">
+        <item>Sport</item>
+        <item>Manga</item>
+        <item>Divers</item>
     </string-array>
 </resources>
