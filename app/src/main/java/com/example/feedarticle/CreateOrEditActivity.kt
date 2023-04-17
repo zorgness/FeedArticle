@@ -15,6 +15,7 @@ import com.example.feedarticle.dataclass.UpdateArticleDto
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.picasso.Picasso
+import convertJsonToDto
 import de.hdodenhof.circleimageview.CircleImageView
 import getArticleById
 import insertArticle
@@ -33,8 +34,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         var articleId: Int? = null
 
-
-        var session: SessionDto? = convertJsonToDto(
+        val session: SessionDto? = convertJsonToDto(
             applicationContext
                 .getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE)
                 .getString(SHAREDPREF_SESSION, null)
@@ -52,26 +52,16 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         }
 
 
-        //debug
-        session?.let {
-            Log.i("session", session.token)
-        }
-
-
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
             this,
             R.array.categories_form,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinnerCategory.adapter = adapter
             spinnerCategory.onItemSelectedListener = this
         }
 
-        //onFocusChange to implement
 
         etUrlImg.onFocusChangeListener = View.OnFocusChangeListener { view, isFocus ->
             val urlImageToVisualize = etUrlImg.text.toString().trim { it <= ' ' }
@@ -126,14 +116,8 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                                 session.token
                             ), articleDtoCallback = {
                                 //toast user if successful
-
-
                             }
                         )
-
-
-
-
                     //
                     Toast.makeText(this@CreateOrEditActivity, "success", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@CreateOrEditActivity,MainActivity::class.java))
@@ -144,16 +128,6 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                 //ERROR
             }
 
-        }
-    }
-
-
-    ////////////////////////////////////////////////////////////////
-
-    fun convertJsonToDto(jsonStr: String?): SessionDto? {
-        return jsonStr?.let {
-            Moshi.Builder().addLast(KotlinJsonAdapterFactory())
-                .build().adapter(SessionDto::class.java).fromJson(it)
         }
     }
 

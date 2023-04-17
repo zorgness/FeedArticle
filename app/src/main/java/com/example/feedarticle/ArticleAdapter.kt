@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.feedarticle.dataclass.ArticleDto
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import getCategoryById
 
 class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
@@ -72,16 +73,7 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
 
     }
 
-    //to change
-    fun getCategoryById(id: Int): String {
-        when(id) {
-            1 -> "Sport"
-            2 -> "Manga"
-            else -> "Divers"
-        }.let {
-            return it
-        }
-    }
+
 
 }
 

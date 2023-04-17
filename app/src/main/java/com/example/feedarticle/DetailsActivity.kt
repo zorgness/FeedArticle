@@ -14,8 +14,10 @@ import com.example.feedarticle.dataclass.SessionDto
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.picasso.Picasso
+import convertJsonToDto
 import deleteArticle
 import getArticleById
+import getCategoryById
 
 class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,24 +78,5 @@ class DetailsActivity : AppCompatActivity() {
         }
 
 
-    }
-
-
-////////////////////////////////////////////////////////////////
-    fun convertJsonToDto(jsonStr: String?): SessionDto? {
-        return jsonStr?.let {
-            Moshi.Builder().addLast(KotlinJsonAdapterFactory())
-                .build().adapter(SessionDto::class.java).fromJson(it)
-        }
-    }
-
-    fun getCategoryById(id: Int): String {
-        when(id) {
-            1 -> "Sport"
-            2 -> "Manga"
-            else -> "Divers"
-        }.let {
-            return it
-        }
     }
 }

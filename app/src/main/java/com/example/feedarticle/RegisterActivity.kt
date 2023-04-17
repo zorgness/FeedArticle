@@ -11,6 +11,8 @@ import android.widget.EditText
 import com.example.feedarticle.dataclass.SessionDto
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import convertDtoToJsonStr
+import myToast
 import register
 
 class RegisterActivity : AppCompatActivity() {
@@ -21,9 +23,6 @@ class RegisterActivity : AppCompatActivity() {
         val etLogin = findViewById<EditText>(R.id.et_user_login)
         val etPassword = findViewById<EditText>(R.id.et_user_password)
         val etPwdConfirm = findViewById<EditText>(R.id.et_user_password_confirm)
-
-
-
 
         findViewById<Button>(R.id.btn_submit_register).setOnClickListener {
             val login = etLogin.text.toString()
@@ -44,10 +43,10 @@ class RegisterActivity : AppCompatActivity() {
                     })
 
                 } else {
-                    //error message password and confirm not the same
+                    myToast("password and confirm are not equals")
                 }
             } else {
-                //error message field is empty
+                myToast("fields can't be blank")
             }
         }
     }
@@ -55,11 +54,4 @@ class RegisterActivity : AppCompatActivity() {
         return password == confirm
     }
 
-
-    ////////////////////////////////////////////////////////////////
-    fun convertDtoToJsonStr(session: SessionDto): String {
-        val gson = Gson()
-        val gsonPretty = GsonBuilder().setPrettyPrinting().create()
-        return gson.toJson(session)
-    }
 }
