@@ -7,6 +7,7 @@ import android.content.Intent
 import android.nfc.NfcAdapter.OnTagRemovedListener
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,6 +19,8 @@ import convertJsonToDto
 import deleteArticle
 import getArticleById
 import getCategoryById
+import myToast
+import responseStatusArticle
 
 class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +31,9 @@ class DetailsActivity : AppCompatActivity() {
         val tvCategory = findViewById<TextView>(R.id.tv_category_details)
         val tvDescription  = findViewById<TextView>(R.id.tv_description_details)
         val ivArticle = findViewById<ImageView>(R.id.iv_details)
+        val btn_update = findViewById<Button>(R.id.btn_edit_article)
+        val btn_delete = findViewById<Button>(R.id.btn_delete_article)
+
 
         var session: SessionDto? = convertJsonToDto(
             applicationContext
@@ -36,8 +42,7 @@ class DetailsActivity : AppCompatActivity() {
 
         )
 
-        intent.getStringExtra(MainActivity.KEY_ARTICLE_ID)?.let {
-            println(it)
+        intent.getStringExtra(MainActivity.KEY_ARTICLE_ID)?.let { it ->
             getArticleById(it.toLong(), session?.token!!, articleDtoCallback = {article->
                 tvCategory.text =  getCategoryById(article?.categorie!!)
                 tvTitle.text = article.titre
@@ -55,7 +60,12 @@ class DetailsActivity : AppCompatActivity() {
                         .into(ivArticle)
                 }
 
-                findViewById<Button>(R.id.btn_edit_article).setOnClickListener {
+                if(session.id != article.idU) {
+                    btn_delete.visibility = View.GONE
+                    btn_update.visibility = View.GONE
+                }
+
+                btn_update.setOnClickListener {
                     ////////////////////////////////
                     startActivity(Intent(this, CreateOrEditActivity::class.java).apply {
                         putExtra(MainActivity.KEY_ARTICLE_ID, article.id.toString())
@@ -63,10 +73,10 @@ class DetailsActivity : AppCompatActivity() {
                     finish()
                 }
 
-                findViewById<Button>(R.id.btn_delete_article).setOnClickListener {
+                btn_delete.setOnClickListener {
 
-                    deleteArticle(article.id.toLong(), session.token, articleDtoCallback = {
-
+                    deleteArticle(article.id.toLong(), session.token, articleDtoCallback = {response->
+                       myToast(responseStatusArticle(response?.returnX, "deleled"))
                     })
 
                     ////////////////////////////////
@@ -76,7 +86,7 @@ class DetailsActivity : AppCompatActivity() {
 
             })
         }
-
-
     }
+
+
 }

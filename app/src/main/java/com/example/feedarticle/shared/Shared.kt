@@ -32,3 +32,15 @@ fun getCategoryById(id: Int): String {
 fun Context.myToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
+
+fun responseStatusArticle(status: Int?, action: String): String {
+    when(status) {
+        1 -> "article $action"
+        0 -> "article not $action"
+        -1 -> "parameters problem"
+        -5 -> "unauthorized"
+        else -> "something went wrong"
+    }.let {
+        return it
+    }
+}

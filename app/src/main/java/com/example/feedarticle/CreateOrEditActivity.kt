@@ -19,9 +19,13 @@ import convertJsonToDto
 import de.hdodenhof.circleimageview.CircleImageView
 import getArticleById
 import insertArticle
+import myToast
+import responseStatusArticle
 import updateArticle
 
 class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+
+    var message = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_or_edit)
@@ -41,6 +45,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         )
 
+        //FILL FORM ON UPDATE
         intent.getStringExtra(MainActivity.KEY_ARTICLE_ID)?.let {
             getArticleById(it.toLong(), session?.token!!, articleDtoCallback = {article->
                 articleId = article?.id
@@ -63,7 +68,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         }
 
 
-        etUrlImg.onFocusChangeListener = View.OnFocusChangeListener { view, isFocus ->
+        etUrlImg.onFocusChangeListener = View.OnFocusChangeListener { _, isFocus ->
             val urlImageToVisualize = etUrlImg.text.toString().trim { it <= ' ' }
             if (!urlImageToVisualize.isEmpty() && !isFocus) {
                 Picasso.get()
@@ -87,9 +92,10 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             val description = etDescription.text.toString()
             val idCategory = spinnerCategory.selectedItemId.toInt() + 1
 
+
             if (urlImg.isNotBlank() && title.isNotBlank() && description.isNotBlank()) {
 
-                if (session != null) {
+                session?.let {
 
                    if(articleId != null)
                         updateArticle(
@@ -99,33 +105,37 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                                 description,
                                 urlImg,
                                 idCategory,
-                                session.token
-                            ), articleDtoCallback = {
-                                //toast user if successful
+                                it.token
+                            ), articleDtoCallback = {response->
+
+                                message = responseStatusArticle(response?.returnX, "updated")
+
 
 
                             }
                         ) else
                         insertArticle(
                             CreaArticleDto(
-                                session.id,
+                                it.id,
                                 title,
                                 description,
                                 urlImg,
                                 idCategory,
-                                session.token
-                            ), articleDtoCallback = {
-                                //toast user if successful
+                                it.token
+                            ), articleDtoCallback = {response->
+                                message = responseStatusArticle(response?.returnX, "added")
                             }
                         )
+
                     //
-                    Toast.makeText(this@CreateOrEditActivity, "success", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this@CreateOrEditActivity, "success", Toast.LENGTH_SHORT).show()
+
                     startActivity(Intent(this@CreateOrEditActivity,MainActivity::class.java))
                     finish()
                 }
 
             } else {
-                //ERROR
+                myToast("fields can't be blank")
             }
 
         }

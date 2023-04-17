@@ -26,10 +26,8 @@ class MainActivity : AppCompatActivity(){
         const val KEY_ARTICLE_ID = "key article id"
     }
 
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var articleAdapter: ArticleAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +38,9 @@ class MainActivity : AppCompatActivity(){
         articleAdapter = ArticleAdapter()
         recyclerView.adapter = articleAdapter
 
-        var spinnerCategory = findViewById<Spinner>(R.id.spinner_category)
+        val spinnerCategory = findViewById<Spinner>(R.id.spinner_category)
 
-        var session: SessionDto? = convertJsonToDto(
+        val session: SessionDto? = convertJsonToDto(
             applicationContext
                 .getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE)
                 .getString(SHAREDPREF_SESSION, null)
@@ -50,14 +48,14 @@ class MainActivity : AppCompatActivity(){
         )
 
 
-        fun refresh() {
-            if (session != null) {
-                getRemoteArticles(session.token){
+        fun sendListToAdapter() {
+            session?.let  {
+                getRemoteArticles(it.token){list->
                     if(spinnerCategory.selectedItemPosition > 0) {
-                        articleAdapter.setArticles(it.filter { el ->
+                        articleAdapter.setArticles(list.filter { el ->
                             el.categorie == spinnerCategory.selectedItemPosition})
                     } else
-                        articleAdapter.setArticles(it)
+                        articleAdapter.setArticles(list)
                 }
             }
         }
@@ -72,12 +70,13 @@ class MainActivity : AppCompatActivity(){
             spinnerCategory.adapter = adapter
             spinnerCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    refresh()
+                    sendListToAdapter()
                 }
                 override fun onNothingSelected(p0: AdapterView<*>?) {}
             }
         }
 
+        //SHOW DETAILS
         articleAdapter.onShowItemCallback = {
             //
             startActivity(Intent(this, DetailsActivity::class.java).apply {
@@ -88,11 +87,13 @@ class MainActivity : AppCompatActivity(){
         }
 
 
+        //NEW ARTICLE
         findViewById<Button>(R.id.btn_new_article).setOnClickListener {
             startActivity(Intent(this@MainActivity, CreateOrEditActivity::class.java))
             finish()
         }
 
+        //LOGOUT
         with(applicationContext.getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE)) {
             findViewById<Button>(R.id.btn_logout).setOnClickListener {
                 edit().remove(SHAREDPREF_SESSION).apply()
@@ -102,15 +103,7 @@ class MainActivity : AppCompatActivity(){
         }
 
 
-        refresh()
+        sendListToAdapter()
 
     }
-
-
-
-
-
-
-
-
 }
