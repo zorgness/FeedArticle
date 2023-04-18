@@ -21,12 +21,12 @@ interface ApiInterface {
     fun getArticle(@Query("id") idArticle: Long, @Query("token") token: String): Call<GetArticleDto>?
 
     @POST(ApiRoutes.NEW)
-    fun newArticle(@Body newCountry: CreaArticleDto): Call<ReturnDto>?
+    fun newArticle(@Body newCountry: CreaArticleDto): Call<StatusDto>?
 
     @POST(ApiRoutes.UPDATE)
-    fun updateArticle(@Body updatedCountry: UpdateArticleDto): Call<ReturnDto>?
+    fun updateArticle(@Body updatedCountry: UpdateArticleDto): Call<StatusDto>?
 
     @FormUrlEncoded
     @POST(ApiRoutes.DELETE)
-    fun deleteCountry(@Field("id") idArticle: Long, @Field("token") token: String): Call<ReturnDto>?
+    fun deleteCountry(@Field("id") idArticle: Long, @Field("token") token: String): Call<StatusDto>?
 }

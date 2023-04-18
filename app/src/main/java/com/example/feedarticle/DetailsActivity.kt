@@ -76,7 +76,7 @@ class DetailsActivity : AppCompatActivity() {
                 btn_delete.setOnClickListener {
 
                     deleteArticle(article.id.toLong(), session.token, articleDtoCallback = {response->
-                       myToast(responseStatusArticle(response?.returnX, "deleled"))
+                       myToast(responseStatusArticle(response.status, "deleted"))
                     })
 
                     ////////////////////////////////

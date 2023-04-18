@@ -108,8 +108,10 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                                 it.token
                             ), articleDtoCallback = {response->
 
-                                message = responseStatusArticle(response?.returnX, "updated")
-
+                                message = responseStatusArticle(response.status, "updated")
+                                myToast(message)
+                                startActivity(Intent(this@CreateOrEditActivity,MainActivity::class.java))
+                                finish()
 
 
                             }
@@ -123,15 +125,22 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                                 idCategory,
                                 it.token
                             ), articleDtoCallback = {response->
-                                message = responseStatusArticle(response?.returnX, "added")
+                                myToast("created article")
+                                message = responseStatusArticle(response.status, "added")
+                                startActivity(Intent(this@CreateOrEditActivity,MainActivity::class.java))
+                                finish()
+                            }, errorCallback = {response->
+                                myToast("error")
+
                             }
                         )
+                    //myToast(message)
+
 
                     //
                     //Toast.makeText(this@CreateOrEditActivity, "success", Toast.LENGTH_SHORT).show()
 
-                    startActivity(Intent(this@CreateOrEditActivity,MainActivity::class.java))
-                    finish()
+
                 }
 
             } else {
