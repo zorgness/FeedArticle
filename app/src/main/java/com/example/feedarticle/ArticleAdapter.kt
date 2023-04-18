@@ -1,6 +1,7 @@
 package com.example.feedarticle
 
 import android.content.Intent
+import android.graphics.Color
 import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedarticle.dataclass.ArticleDto
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import getArticleColor
 import getCategoryById
 
 class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
@@ -51,7 +55,8 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
                    .into(civImg)
                 }
 
-                articleCard.setOnClickListener {
+                articleLayout.setBackgroundColor(Color.parseColor(getArticleColor(article.categorie)))
+                articleLayout.setOnClickListener {
                     onShowItemCallback?.invoke(article)
                 }
             }
@@ -66,7 +71,7 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
 
     inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val articleCard = itemView.findViewById<CardView>(R.id.card_article)
+        val articleLayout = itemView.findViewById<ConstraintLayout>(R.id.article_layout)
         val tvTitle = itemView.findViewById<TextView>(R.id.tv_name_item_rv_article)
         val tvCategory = itemView.findViewById<TextView>(R.id.tv_category_item_rv_article)
         val civImg = itemView.findViewById<CircleImageView>(R.id.civ_image_item_rv_article)

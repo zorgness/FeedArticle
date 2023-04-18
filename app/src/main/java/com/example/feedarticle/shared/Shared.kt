@@ -29,6 +29,16 @@ fun getCategoryById(id: Int): String {
     }
 }
 
+fun getArticleColor(id: Int): String {
+    when(id) {
+        1-> "#008B8B"
+        2-> "#DB7093"
+        else -> "#E9967A"
+    }.let {
+        return it
+    }
+}
+
 fun Context.myToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
