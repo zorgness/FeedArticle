@@ -72,7 +72,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         etUrlImg.onFocusChangeListener = View.OnFocusChangeListener { _, isFocus ->
             val urlImageToVisualize = etUrlImg.text.toString().trim { it <= ' ' }
-            if (!urlImageToVisualize.isEmpty() && !isFocus) {
+            if (urlImageToVisualize.isNotEmpty() && !isFocus) {
                 Picasso.get()
                     .load(urlImageToVisualize)
                     .resize(300, 300)

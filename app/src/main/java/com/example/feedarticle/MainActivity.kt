@@ -21,7 +21,7 @@ import getRemoteArticles
 import myToast
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     companion object {
         const val KEY_ARTICLE_ID = "key article id"
@@ -50,73 +50,63 @@ class MainActivity : AppCompatActivity() {
 
 
         fun sendListToAdapter() {
-            session?.let {
-                getRemoteArticles(it.token,
-                    articleDtoCallback = { list ->
-                        if (spinnerCategory.selectedItemPosition > 0) {
-                            articleAdapter.setArticles(list.filter { el ->
-                                el.categorie == spinnerCategory.selectedItemPosition
-                            })
-                        } else
-                            articleAdapter.setArticles(list)
-
-                    }, errorCallback = { error ->
-                        myToast(error.toString())
-                    })
+            session?.let  {
+                getRemoteArticles(it.token, articleDtoCallback = {list->
+                    if(spinnerCategory.selectedItemPosition > 0) {
+                        articleAdapter.setArticles(list.filter { el ->
+                            el.categorie == spinnerCategory.selectedItemPosition})
+                    } else
+                        articleAdapter.setArticles(list)
+                }, errorCallback = {error->
+                    myToast(error.toString())
+                } )
             }
-
-
-            ArrayAdapter.createFromResource(
-                this,
-                R.array.categories,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                spinnerCategory.adapter = adapter
-                spinnerCategory.onItemSelectedListener =
-                    object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(
-                            p0: AdapterView<*>?,
-                            p1: View?,
-                            p2: Int,
-                            p3: Long
-                        ) {
-                            sendListToAdapter()
-                        }
-
-                        override fun onNothingSelected(p0: AdapterView<*>?) {}
-                    }
-            }
-
-            //SHOW DETAILS
-            articleAdapter.onShowItemCallback = {
-                //
-                startActivity(Intent(this, DetailsActivity::class.java).apply {
-                    putExtra(KEY_ARTICLE_ID, it.id.toString())
-                })
-
-                finish()
-            }
-
-
-            //NEW ARTICLE
-            findViewById<Button>(R.id.btn_new_article).setOnClickListener {
-                startActivity(Intent(this@MainActivity, CreateOrEditActivity::class.java))
-                finish()
-            }
-
-            //LOGOUT
-            with(applicationContext.getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE)) {
-                findViewById<Button>(R.id.btn_logout).setOnClickListener {
-                    edit().remove(SHAREDPREF_SESSION).apply()
-                    startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-                    finish()
-                }
-            }
-
-
-            sendListToAdapter()
-
         }
+
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.categories,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerCategory.adapter = adapter
+            spinnerCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    sendListToAdapter()
+                }
+                override fun onNothingSelected(p0: AdapterView<*>?) {}
+            }
+        }
+
+        //SHOW DETAILS
+        articleAdapter.onShowItemCallback = {
+            //
+            startActivity(Intent(this, DetailsActivity::class.java).apply {
+                putExtra(KEY_ARTICLE_ID,it.id.toString())
+            })
+
+            finish()
+        }
+
+
+        //NEW ARTICLE
+        findViewById<Button>(R.id.btn_new_article).setOnClickListener {
+            startActivity(Intent(this@MainActivity, CreateOrEditActivity::class.java))
+            finish()
+        }
+
+        //LOGOUT
+        with(applicationContext.getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE)) {
+            findViewById<Button>(R.id.btn_logout).setOnClickListener {
+                edit().remove(SHAREDPREF_SESSION).apply()
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                finish()
+            }
+        }
+
+
+        sendListToAdapter()
+
     }
 }
