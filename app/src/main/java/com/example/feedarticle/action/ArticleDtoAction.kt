@@ -6,7 +6,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-fun getRemoteArticles(token: String, articleDtoCallback: (List<ArticleDto>) -> Unit) {
+fun getRemoteArticles(token: String, articleDtoCallback: (List<ArticleDto>) -> Unit, errorCallback: (String?)->Unit) {
     var call: Call<GetArticlesDto>? = ApiService.getApi().getAllArticles(token)
     call?.enqueue(object : Callback<GetArticlesDto> {
         override fun onResponse(call: Call<GetArticlesDto>, response: Response<GetArticlesDto>) {
@@ -19,13 +19,13 @@ fun getRemoteArticles(token: String, articleDtoCallback: (List<ArticleDto>) -> U
         }
 
         override fun onFailure(call: Call<GetArticlesDto>, t: Throwable) {
-            //TODO("Not yet implemented")
+            errorCallback.invoke(t.message)
         }
 
     })
 }
 
-fun getArticleById(id: Long, token: String, articleDtoCallback: (ArticleDto?) -> Unit) {
+fun getArticleById(id: Long, token: String, articleDtoCallback: (ArticleDto?) -> Unit, errorCallback: (String?)->Unit) {
     var call: Call<GetArticleDto>? = ApiService.getApi().getArticle(id, token)
     call?.enqueue(object : Callback<GetArticleDto> {
         override fun onResponse(call: Call<GetArticleDto>, response: Response<GetArticleDto>) {
@@ -36,53 +36,49 @@ fun getArticleById(id: Long, token: String, articleDtoCallback: (ArticleDto?) ->
         }
 
         override fun onFailure(call: Call<GetArticleDto>, t: Throwable) {
-            //TODO("Not yet implemented")
+            errorCallback.invoke(t.message)
         }
     })
 }
 
-fun insertArticle(newArticle: CreaArticleDto, articleDtoCallback: (StatusDto) -> Unit, errorCallback: (StatusDto) -> Unit) {
+fun insertArticle(newArticle: CreaArticleDto, articleDtoCallback: (StatusDto) -> Unit, errorCallback: (String?)->Unit) {
     var call: Call<StatusDto>? = ApiService.getApi().newArticle(newArticle)
 
     call?.enqueue(object : Callback<StatusDto> {
         override fun onResponse(call: Call<StatusDto>, response: Response<StatusDto>) {
             response.body()?.let {
-                if(response.isSuccessful)
+
                     articleDtoCallback.invoke(it)
-                else
-                    errorCallback.invoke(it)
+
             }
         }
 
         override fun onFailure(call: Call<StatusDto>, t: Throwable) {
-            //TODO("Not yet implemented")
+            errorCallback.invoke(t.message)
         }
 
     })
 }
 
-fun updateArticle(updatedArticle: UpdateArticleDto, articleDtoCallback: (StatusDto) -> Unit) {
+fun updateArticle(updatedArticle: UpdateArticleDto, articleDtoCallback: (StatusDto) -> Unit, errorCallback: (String?)->Unit ) {
     var call: Call<StatusDto>? = ApiService.getApi().updateArticle(updatedArticle)
 
     call?.enqueue(object : Callback<StatusDto> {
         override fun onResponse(call: Call<StatusDto>, response: Response<StatusDto>) {
             response.body()?.let {
-
-                if(response.isSuccessful)
                     articleDtoCallback.invoke(it)
-                else
-                    Log.i("StatusDto", "Error updating article")
+
             }
         }
 
         override fun onFailure(call: Call<StatusDto>, t: Throwable) {
-            //TODO("Not yet implemented")
+            errorCallback.invoke(t.message)
         }
 
     })
 }
 
-fun deleteArticle(idArticle: Long, token: String, articleDtoCallback: (StatusDto) -> Unit) {
+fun deleteArticle(idArticle: Long, token: String, articleDtoCallback: (StatusDto) -> Unit, errorCallback: (String?)->Unit) {
     var call: Call<StatusDto>? = ApiService.getApi().deleteCountry(idArticle, token)
 
     call?.enqueue(object : Callback<StatusDto> {
@@ -93,7 +89,7 @@ fun deleteArticle(idArticle: Long, token: String, articleDtoCallback: (StatusDto
         }
 
         override fun onFailure(call: Call<StatusDto>, t: Throwable) {
-            //TODO("Not yet implemented")
+            errorCallback.invoke(t.message)
         }
 
     })

@@ -77,13 +77,16 @@ class DetailsActivity : AppCompatActivity() {
 
                     deleteArticle(article.id.toLong(), session.token, articleDtoCallback = {response->
                        myToast(responseStatusArticle(response.status, "deleted"))
+                        ////////////////////////////////
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }, errorCallback = {error->
+                        myToast(error.toString())
                     })
-
-                    ////////////////////////////////
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
                 }
 
+            }, errorCallback = {error->
+                myToast(error.toString())
             })
         }
     }

@@ -53,6 +53,8 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                 etTitle.setText(article?.titre)
                 etDescription.setText(article?.descriptif)
                 spinnerCategory.setSelection(article?.categorie!! - 1)
+            }, errorCallback = {error->
+                myToast(error.toString())
             })
         }
 
@@ -108,12 +110,13 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                                 it.token
                             ), articleDtoCallback = {response->
 
-                                message = responseStatusArticle(response.status, "updated")
-                                myToast(message)
+                                myToast(responseStatusArticle(response.status, "updated"))
+                                ////////////////////////////////////////////////////////////////
                                 startActivity(Intent(this@CreateOrEditActivity,MainActivity::class.java))
                                 finish()
 
-
+                            }, errorCallback = {error->
+                                myToast(error.toString())
                             }
                         ) else
                         insertArticle(
@@ -125,22 +128,14 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                                 idCategory,
                                 it.token
                             ), articleDtoCallback = {response->
-                                myToast("created article")
-                                message = responseStatusArticle(response.status, "added")
+                                 myToast(responseStatusArticle(response.status, "added"))
+                                //////////
                                 startActivity(Intent(this@CreateOrEditActivity,MainActivity::class.java))
                                 finish()
-                            }, errorCallback = {response->
-                                myToast("error")
-
+                            }, errorCallback = {error->
+                                myToast(error.toString())
                             }
                         )
-                    //myToast(message)
-
-
-                    //
-                    //Toast.makeText(this@CreateOrEditActivity, "success", Toast.LENGTH_SHORT).show()
-
-
                 }
 
             } else {
