@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-fun register(login: String, mdp: String, loginCallback: (SessionDto) -> Unit) {
+fun register(login: String, mdp: String, loginCallback: (SessionDto) -> Unit, errorCallback: (String?)->Unit) {
     var call: Call<SessionDto>? = ApiService.getApi().register(login, mdp)
     call?.enqueue(object : Callback<SessionDto> {
         override fun onResponse(call: Call<SessionDto>, response: Response<SessionDto>) {
@@ -14,13 +14,13 @@ fun register(login: String, mdp: String, loginCallback: (SessionDto) -> Unit) {
         }
 
         override fun onFailure(call: Call<SessionDto>, t: Throwable) {
-            TODO("Not yet implemented")
+            errorCallback.invoke(t.message)
         }
 
     })
 }
 
-fun login(login: String, mdp: String, loginCallback: (SessionDto) -> Unit) {
+fun login(login: String, mdp: String, loginCallback: (SessionDto) -> Unit, errorCallback: (String?)->Unit) {
     var call: Call<SessionDto>? = ApiService.getApi().login(login, mdp)
     call?.enqueue(object : Callback<SessionDto> {
         override fun onResponse(call: Call<SessionDto>, response: Response<SessionDto>) {
@@ -30,7 +30,7 @@ fun login(login: String, mdp: String, loginCallback: (SessionDto) -> Unit) {
         }
 
         override fun onFailure(call: Call<SessionDto>, t: Throwable) {
-            TODO("Not yet implemented")
+            errorCallback.invoke(t.message)
         }
 
     })

@@ -29,17 +29,22 @@ class RegisterActivity : AppCompatActivity() {
             val password = etPassword.text.toString()
             val confirm = etPwdConfirm.text.toString()
 
-            if(login.isNotBlank() && password.isNotBlank()) {
-                if(validatePassword(password, confirm)) {
+            if (login.isNotBlank() && password.isNotBlank()) {
+                if (validatePassword(password, confirm)) {
                     register(login, password, loginCallback = {
                         with(it) {
-                            applicationContext.getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE)
+                            applicationContext.getSharedPreferences(
+                                SHAREDPREF_NAME,
+                                Context.MODE_PRIVATE
+                            )
                                 .edit()
                                 .putString(SHAREDPREF_SESSION, convertDtoToJsonStr(this))
                                 .apply()
                             startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                             finish()
                         }
+                    }, errorCallback = { error ->
+                        myToast(error.toString())
                     })
 
                 } else {
@@ -50,6 +55,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun validatePassword(password: String, confirm: String): Boolean {
         return password == confirm
     }

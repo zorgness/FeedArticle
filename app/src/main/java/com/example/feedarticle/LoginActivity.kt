@@ -36,18 +36,28 @@ class LoginActivity : AppCompatActivity() {
             val login = etLogin.text.toString()
             val password = etPassword.text.toString()
 
-            if(login.isNotBlank() && password.isNotBlank()) {
+            if (login.isNotBlank() && password.isNotBlank()) {
 
-                    login(login, password, loginCallback = {
-                        with(it) {
-                            applicationContext.getSharedPreferences(SHAREDPREF_NAME, android.content.Context.MODE_PRIVATE)
-                                .edit()
-                                .putString(SHAREDPREF_SESSION, convertDtoToJsonStr(this))
-                                .apply()
-                            startActivity(Intent(this@LoginActivity, com.example.feedarticle.MainActivity::class.java))
-                            finish()
-                        }
-                    })
+                login(login, password, loginCallback = {
+                    with(it) {
+                        applicationContext.getSharedPreferences(
+                            SHAREDPREF_NAME,
+                            android.content.Context.MODE_PRIVATE
+                        )
+                            .edit()
+                            .putString(SHAREDPREF_SESSION, convertDtoToJsonStr(this))
+                            .apply()
+                        startActivity(
+                            Intent(
+                                this@LoginActivity,
+                                com.example.feedarticle.MainActivity::class.java
+                            )
+                        )
+                        finish()
+                    }
+                }, errorCallback = { error ->
+                    myToast(error.toString())
+                })
 
             } else {
                 myToast("fields can't be empty")
