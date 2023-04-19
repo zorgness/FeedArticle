@@ -21,56 +21,68 @@
         <TextView
             android:id="@+id/tv_category_details"
             android:layout_width="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:layout_weight="1"
-            android:text="@string/welcome" />
-
-
+            android:text="@string/welcome"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
 
     </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/lin_layout_middle"
+
+
+        <LinearLayout
+            android:id="@+id/lin_layout_middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/lin_layout_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lin_layout_header">
+
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="120dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/lin_layout_bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lin_layout_header">
-
-        <TextView
-            android:id="@+id/tv_title_details"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="TextView"
-            android:textAlignment="center"/>
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_details"
-            android:layout_width="300dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="16dp"
-            android:layout_gravity="center"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            <TextView
+                android:id="@+id/tv_title_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                tools:text="TextView" />
 
-        <TextView
-            android:id="@+id/tv_description_details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:textAlignment="center"
-            tools:text="blabfjkqsdnfklqdsjfklqsdjfklqdsjflkqsjdklfjqsdklfjqklsjfklqdsjflqkdsjfdsqklùjfqdskljfglqksdjgklqsdjfgklqsjdfqsdkljfkl" />
+            <ImageView
+                android:id="@+id/iv_details"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/details"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
+            <TextView
+                android:id="@+id/tv_description_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:textAlignment="center"
+                tools:text="blabfjkqsdnfklqdsjfklqsdjfklqdsjflkqsjdklfjqsdklfjqklsjfklqdsjflqkdsjfdsqklùjfqdskljfglqksdjgklqsdjfgklqsjdfqsdkljfkl" />
+        </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
+        </LinearLayout>
+
 
 
     <LinearLayout
@@ -85,6 +97,7 @@
 
         <Button
             android:id="@+id/btn_edit_article"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -92,6 +105,7 @@
 
         <Button
             android:id="@+id/btn_delete_article"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
