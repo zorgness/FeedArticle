@@ -71,10 +71,10 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
 
     inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val articleLayout = itemView.findViewById<ConstraintLayout>(R.id.article_layout)
-        val tvTitle = itemView.findViewById<TextView>(R.id.tv_name_item_rv_article)
-        val tvCategory = itemView.findViewById<TextView>(R.id.tv_category_item_rv_article)
-        val civImg = itemView.findViewById<CircleImageView>(R.id.civ_image_item_rv_article)
+        val articleLayout: ConstraintLayout = itemView.findViewById(R.id.article_layout)
+        val tvTitle: TextView = itemView.findViewById(R.id.tv_name_item_rv_article)
+        val tvCategory: TextView = itemView.findViewById(R.id.tv_category_item_rv_article)
+        val civImg: CircleImageView = itemView.findViewById(R.id.civ_image_item_rv_article)
 
     }
 

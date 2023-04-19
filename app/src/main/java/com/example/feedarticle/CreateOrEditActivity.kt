@@ -110,8 +110,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                                 it.token
                             ), articleDtoCallback = { response ->
                                 myToast(responseStatusArticle(response.status, "updated"))
-                                val data = Intent()
-                                setResult(RESULT_OK, data.putExtra("position", articlePosition))
+                                startActivity(Intent(this, MainActivity::class.java))
                                 finish()
                             }, errorCallback = { error ->
                                 myToast(error.toString())

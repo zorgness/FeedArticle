@@ -11,6 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity(){
         }
 
 
+        //SPINNER CONFIG
         ArrayAdapter.createFromResource(
             this,
             R.array.categories,
@@ -82,6 +84,7 @@ class MainActivity : AppCompatActivity(){
             }
         }
 
+        //FOR INSERT AND DELETE
         val registerActivityForResult= registerForActivityResult( ActivityResultContracts.StartActivityForResult()
         ){ result -> if (result.resultCode == RESULT_OK) {
             val position = result.data?.getStringExtra(KEY_ARTICLE_POSITION)?.toInt()
