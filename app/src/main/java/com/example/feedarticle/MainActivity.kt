@@ -67,8 +67,8 @@ class MainActivity : AppCompatActivity(){
             }
         }
 
-
         //SPINNER CONFIG
+
         ArrayAdapter.createFromResource(
             this,
             R.array.categories,
@@ -83,6 +83,8 @@ class MainActivity : AppCompatActivity(){
                 override fun onNothingSelected(p0: AdapterView<*>?) {}
             }
         }
+
+
 
         //FOR INSERT AND DELETE
         val registerActivityForResult= registerForActivityResult( ActivityResultContracts.StartActivityForResult()

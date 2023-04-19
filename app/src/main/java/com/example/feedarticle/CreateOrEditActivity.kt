@@ -23,7 +23,7 @@ import myToast
 import responseStatusArticle
 import updateArticle
 
-class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class CreateOrEditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_or_edit)
@@ -35,7 +35,6 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         val civImgPrev = findViewById<CircleImageView>(R.id.civ_article_img_preview)
 
         var articleId: Int? = null
-        var articlePosition: String? = null
 
         val session: SessionDto? = convertJsonToDto(
             applicationContext
@@ -43,6 +42,16 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                 .getString(SHAREDPREF_SESSION, null)
 
         )
+
+        //SPINNER CONFIG
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.categories_form,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerCategory.adapter = adapter
+        }
 
         //FILL FORM ON UPDATE
         intent.getStringExtra(MainActivity.KEY_ARTICLE_ID)?.let {
@@ -57,18 +66,6 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             })
         }
 
-        articlePosition = intent.getStringExtra(MainActivity.KEY_ARTICLE_POSITION)
-
-
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.categories_form,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerCategory.adapter = adapter
-            spinnerCategory.onItemSelectedListener = this
-        }
 
 
         etUrlImg.onFocusChangeListener = View.OnFocusChangeListener { _, isFocus ->
@@ -128,7 +125,6 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                                 myToast(responseStatusArticle(response.status, "added"))
                                 setResult(RESULT_OK)
                                 finish()
-
                             }, errorCallback = { error ->
                                 myToast(error.toString())
                             }
@@ -141,9 +137,4 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         }
     }
-
-
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {}
-    override fun onNothingSelected(p0: AdapterView<*>?) {}
-
 }

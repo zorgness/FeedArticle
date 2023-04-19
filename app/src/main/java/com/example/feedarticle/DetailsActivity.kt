@@ -42,16 +42,15 @@ class DetailsActivity : AppCompatActivity() {
         val headerLayout = findViewById<LinearLayout>(R.id.lin_layout_header)
         val bottomLayout = findViewById<LinearLayout>(R.id.lin_layout_bottom)
 
-        var articlePosition: String? = null
 
-        var session: SessionDto? = convertJsonToDto(
+        val session: SessionDto? = convertJsonToDto(
             applicationContext
                 .getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE)
                 .getString(SHAREDPREF_SESSION, null)
 
         )
 
-        articlePosition = intent.getStringExtra(MainActivity.KEY_ARTICLE_POSITION)
+        val articlePosition = intent.getStringExtra(MainActivity.KEY_ARTICLE_POSITION)
 
         intent.getStringExtra(MainActivity.KEY_ARTICLE_ID)?.let { it ->
             getArticleById(it.toLong(), session?.token!!, articleDtoCallback = { article ->
@@ -68,7 +67,7 @@ class DetailsActivity : AppCompatActivity() {
                         .into(ivArticle)
                 } else {
                     Picasso.get()
-                        .load(article.urlImage).error(R.drawable.ic_launcher_foreground)
+                        .load(article.urlImage).error(android.R.color.transparent)
                         .resize(300, 300)
                         .into(ivArticle)
                 }
@@ -79,7 +78,6 @@ class DetailsActivity : AppCompatActivity() {
                     btn_delete.visibility = View.GONE
                     btn_update.visibility = View.GONE
                 }
-
 
 
                 btn_update.setOnClickListener {

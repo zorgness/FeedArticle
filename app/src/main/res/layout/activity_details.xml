@@ -20,10 +20,14 @@
 
         <TextView
             android:id="@+id/tv_category_details"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="welcome" />
+            android:text="@string/welcome" />
 
 
 
@@ -46,7 +50,7 @@
             android:id="@+id/tv_title_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            tools:text="TextView"
             android:textAlignment="center"/>
 
         <ImageView
@@ -54,6 +58,7 @@
             android:layout_width="300dp"
             android:layout_height="150dp"
             android:layout_marginTop="16dp"
+            android:layout_gravity="center"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
@@ -62,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:textAlignment="center"
-            android:text="blabfjkqsdnfklqdsjfklqsdjfklqdsjflkqsjdklfjqsdklfjqklsjfklqdsjflqkdsjfdsqklùjfqdskljfglqksdjgklqsdjfgklqsjdfqsdkljfkl" />
+            tools:text="blabfjkqsdnfklqdsjfklqsdjfklqdsjflkqsjdklfjqsdklfjqklsjfklqdsjflqkdsjfdsqklùjfqdskljfglqksdjgklqsdjfgklqsjdfqsdkljfkl" />
 
 
     </LinearLayout>
