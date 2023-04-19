@@ -47,9 +47,7 @@ fun insertArticle(newArticle: CreaArticleDto, articleDtoCallback: (StatusDto) ->
     call?.enqueue(object : Callback<StatusDto> {
         override fun onResponse(call: Call<StatusDto>, response: Response<StatusDto>) {
             response.body()?.let {
-
                     articleDtoCallback.invoke(it)
-
             }
         }
 

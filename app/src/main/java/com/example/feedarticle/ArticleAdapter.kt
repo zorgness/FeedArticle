@@ -23,7 +23,7 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
 
 
     private var articles: MutableList<ArticleDto> = mutableListOf()
-    var onShowItemCallback: ((ArticleDto) -> Unit)? = null
+    var onShowItemCallback: ((ArticleDto, Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleAdapter.ArticleViewHolder {
         LayoutInflater.from(parent.context).inflate(R.layout.item_rv_article, parent, false).let {
@@ -57,7 +57,7 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
 
                 articleLayout.setBackgroundColor(Color.parseColor(getArticleColor(article.categorie)))
                 articleLayout.setOnClickListener {
-                    onShowItemCallback?.invoke(article)
+                    onShowItemCallback?.invoke(article, position)
                 }
             }
         }

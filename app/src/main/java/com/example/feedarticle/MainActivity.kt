@@ -11,6 +11,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedarticle.dataclass.SessionDto
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity(){
 
     companion object {
         const val KEY_ARTICLE_ID = "key article id"
+        const val KEY_ARTICLE_POSITION = "key article position"
     }
 
     private lateinit var recyclerView: RecyclerView
@@ -79,21 +82,27 @@ class MainActivity : AppCompatActivity(){
             }
         }
 
-        //SHOW DETAILS
-        articleAdapter.onShowItemCallback = {
-            //
-            startActivity(Intent(this, DetailsActivity::class.java).apply {
-                putExtra(KEY_ARTICLE_ID,it.id.toString())
-            })
+        val registerActivityForResult= registerForActivityResult( ActivityResultContracts.StartActivityForResult()
+        ){ result -> if (result.resultCode == RESULT_OK) {
+            val position = result.data?.getStringExtra(KEY_ARTICLE_POSITION)?.toInt()
+            position?.let {
+                articleAdapter.notifyItemRemoved(it)
+            } ?: sendListToAdapter()
+        }}
 
-            finish()
+
+        //SHOW DETAILS
+        articleAdapter.onShowItemCallback = {article, position->
+            registerActivityForResult.launch(Intent(this, DetailsActivity::class.java).apply {
+                putExtra(KEY_ARTICLE_ID,article.id.toString())
+                putExtra(KEY_ARTICLE_POSITION,position.toString())
+            })
         }
 
 
         //NEW ARTICLE
         findViewById<Button>(R.id.btn_new_article).setOnClickListener {
-            startActivity(Intent(this@MainActivity, CreateOrEditActivity::class.java))
-            finish()
+            registerActivityForResult.launch(Intent(this, CreateOrEditActivity::class.java))
         }
 
         //LOGOUT

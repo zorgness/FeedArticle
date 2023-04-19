@@ -11,6 +11,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.feedarticle.dataclass.SessionDto
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -23,6 +25,16 @@ import myToast
 import responseStatusArticle
 
 class DetailsActivity : AppCompatActivity() {
+
+   /* val registerActivityForResultUpdate= registerForActivityResult( ActivityResultContracts.StartActivityForResult()
+    ){ result -> if (result.resultCode == RESULT_OK) {
+        val position = result.data?.getStringExtra("position")?.toInt()
+        myToast("Activity result $position")
+        val data = Intent()
+        setResult(RESULT_OK, data.putExtra("position", position))
+        finish()
+    }}*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -34,6 +46,8 @@ class DetailsActivity : AppCompatActivity() {
         val btn_update = findViewById<Button>(R.id.btn_edit_article)
         val btn_delete = findViewById<Button>(R.id.btn_delete_article)
 
+        var articlePosition: String? = null
+
 
         var session: SessionDto? = convertJsonToDto(
             applicationContext
@@ -41,6 +55,10 @@ class DetailsActivity : AppCompatActivity() {
                 .getString(SHAREDPREF_SESSION, null)
 
         )
+
+        articlePosition = intent.getStringExtra(MainActivity.KEY_ARTICLE_POSITION)
+
+        myToast(articlePosition!!)
 
         intent.getStringExtra(MainActivity.KEY_ARTICLE_ID)?.let { it ->
             getArticleById(it.toLong(), session?.token!!, articleDtoCallback = {article->
@@ -60,25 +78,33 @@ class DetailsActivity : AppCompatActivity() {
                         .into(ivArticle)
                 }
 
+
+
                 if(session.id != article.idU) {
                     btn_delete.visibility = View.GONE
                     btn_update.visibility = View.GONE
                 }
 
+
+
                 btn_update.setOnClickListener {
-                    ////////////////////////////////
-                    startActivity(Intent(this, CreateOrEditActivity::class.java).apply {
-                        putExtra(MainActivity.KEY_ARTICLE_ID, article.id.toString())
-                    })
-                    finish()
+                  /*  registerActivityForResultUpdate.launch(
+                        Intent(
+                            this,
+                            CreateOrEditActivity::class.java
+                        ).apply {
+                            putExtra(MainActivity.KEY_ARTICLE_ID, article.id.toString())
+                            putExtra(MainActivity.KEY_ARTICLE_POSITION, articlePosition)
+                        })*/
                 }
 
                 btn_delete.setOnClickListener {
 
                     deleteArticle(article.id.toLong(), session.token, articleDtoCallback = {response->
                        myToast(responseStatusArticle(response.status, "deleted"))
-                        ////////////////////////////////
-                        startActivity(Intent(this, MainActivity::class.java))
+                        val returnIntent = Intent()
+                        returnIntent.putExtra(MainActivity.KEY_ARTICLE_POSITION, articlePosition)
+                        setResult(RESULT_OK, returnIntent)
                         finish()
                     }, errorCallback = {error->
                         myToast(error.toString())

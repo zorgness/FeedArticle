@@ -24,8 +24,6 @@ import responseStatusArticle
 import updateArticle
 
 class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
-
-    var message = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_or_edit)
@@ -37,6 +35,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         val civImgPrev = findViewById<CircleImageView>(R.id.civ_article_img_preview)
 
         var articleId: Int? = null
+        var articlePosition: String? = null
 
         val session: SessionDto? = convertJsonToDto(
             applicationContext
@@ -47,16 +46,18 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         //FILL FORM ON UPDATE
         intent.getStringExtra(MainActivity.KEY_ARTICLE_ID)?.let {
-            getArticleById(it.toLong(), session?.token!!, articleDtoCallback = {article->
+            getArticleById(it.toLong(), session?.token!!, articleDtoCallback = { article ->
                 articleId = article?.id
                 etUrlImg.setText(article?.urlImage)
                 etTitle.setText(article?.titre)
                 etDescription.setText(article?.descriptif)
                 spinnerCategory.setSelection(article?.categorie!! - 1)
-            }, errorCallback = {error->
+            }, errorCallback = { error ->
                 myToast(error.toString())
             })
         }
+
+        articlePosition = intent.getStringExtra(MainActivity.KEY_ARTICLE_POSITION)
 
 
         ArrayAdapter.createFromResource(
@@ -98,8 +99,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             if (urlImg.isNotBlank() && title.isNotBlank() && description.isNotBlank()) {
 
                 session?.let {
-
-                   if(articleId != null)
+                    if (articleId != null)
                         updateArticle(
                             UpdateArticleDto(
                                 articleId!!,
@@ -108,14 +108,12 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                                 urlImg,
                                 idCategory,
                                 it.token
-                            ), articleDtoCallback = {response->
-
+                            ), articleDtoCallback = { response ->
                                 myToast(responseStatusArticle(response.status, "updated"))
-                                ////////////////////////////////////////////////////////////////
-                                startActivity(Intent(this@CreateOrEditActivity,MainActivity::class.java))
+                                val data = Intent()
+                                setResult(RESULT_OK, data.putExtra("position", articlePosition))
                                 finish()
-
-                            }, errorCallback = {error->
+                            }, errorCallback = { error ->
                                 myToast(error.toString())
                             }
                         ) else
@@ -127,12 +125,12 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
                                 urlImg,
                                 idCategory,
                                 it.token
-                            ), articleDtoCallback = {response->
-                                 myToast(responseStatusArticle(response.status, "added"))
-                                //////////
-                                startActivity(Intent(this@CreateOrEditActivity,MainActivity::class.java))
+                            ), articleDtoCallback = { response ->
+                                myToast(responseStatusArticle(response.status, "added"))
+                                setResult(RESULT_OK)
                                 finish()
-                            }, errorCallback = {error->
+
+                            }, errorCallback = { error ->
                                 myToast(error.toString())
                             }
                         )
@@ -144,6 +142,7 @@ class CreateOrEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         }
     }
+
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {}
     override fun onNothingSelected(p0: AdapterView<*>?) {}
