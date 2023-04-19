@@ -69,6 +69,8 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>()
         notifyDataSetChanged()
     }
 
+
+
     inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val articleLayout: ConstraintLayout = itemView.findViewById(R.id.article_layout)

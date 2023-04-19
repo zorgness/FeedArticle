@@ -6,13 +6,17 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-fun getRemoteArticles(token: String, articleDtoCallback: (List<ArticleDto>) -> Unit, errorCallback: (String?)->Unit) {
+fun getRemoteArticles(
+    token: String,
+    articleDtoCallback: (List<ArticleDto>) -> Unit,
+    errorCallback: (String?) -> Unit
+) {
     var call: Call<GetArticlesDto>? = ApiService.getApi().getAllArticles(token)
     call?.enqueue(object : Callback<GetArticlesDto> {
         override fun onResponse(call: Call<GetArticlesDto>, response: Response<GetArticlesDto>) {
             response.body()?.let {
 
-                    articleDtoCallback.invoke(it.articles)
+                articleDtoCallback.invoke(it.articles)
 
             }
 
@@ -25,7 +29,12 @@ fun getRemoteArticles(token: String, articleDtoCallback: (List<ArticleDto>) -> U
     })
 }
 
-fun getArticleById(id: Long, token: String, articleDtoCallback: (ArticleDto?) -> Unit, errorCallback: (String?)->Unit) {
+fun getArticleById(
+    id: Long,
+    token: String,
+    articleDtoCallback: (ArticleDto?) -> Unit,
+    errorCallback: (String?) -> Unit
+) {
     var call: Call<GetArticleDto>? = ApiService.getApi().getArticle(id, token)
     call?.enqueue(object : Callback<GetArticleDto> {
         override fun onResponse(call: Call<GetArticleDto>, response: Response<GetArticleDto>) {
@@ -41,13 +50,17 @@ fun getArticleById(id: Long, token: String, articleDtoCallback: (ArticleDto?) ->
     })
 }
 
-fun insertArticle(newArticle: CreaArticleDto, articleDtoCallback: (StatusDto) -> Unit, errorCallback: (String?)->Unit) {
+fun insertArticle(
+    newArticle: CreaArticleDto,
+    articleDtoCallback: (StatusDto) -> Unit,
+    errorCallback: (String?) -> Unit
+) {
     var call: Call<StatusDto>? = ApiService.getApi().newArticle(newArticle)
 
     call?.enqueue(object : Callback<StatusDto> {
         override fun onResponse(call: Call<StatusDto>, response: Response<StatusDto>) {
             response.body()?.let {
-                    articleDtoCallback.invoke(it)
+                articleDtoCallback.invoke(it)
             }
         }
 
@@ -58,13 +71,17 @@ fun insertArticle(newArticle: CreaArticleDto, articleDtoCallback: (StatusDto) ->
     })
 }
 
-fun updateArticle(updatedArticle: UpdateArticleDto, articleDtoCallback: (StatusDto) -> Unit, errorCallback: (String?)->Unit ) {
+fun updateArticle(
+    updatedArticle: UpdateArticleDto,
+    articleDtoCallback: (StatusDto) -> Unit,
+    errorCallback: (String?) -> Unit
+) {
     var call: Call<StatusDto>? = ApiService.getApi().updateArticle(updatedArticle)
 
     call?.enqueue(object : Callback<StatusDto> {
         override fun onResponse(call: Call<StatusDto>, response: Response<StatusDto>) {
             response.body()?.let {
-                    articleDtoCallback.invoke(it)
+                articleDtoCallback.invoke(it)
 
             }
         }
@@ -76,7 +93,12 @@ fun updateArticle(updatedArticle: UpdateArticleDto, articleDtoCallback: (StatusD
     })
 }
 
-fun deleteArticle(idArticle: Long, token: String, articleDtoCallback: (StatusDto) -> Unit, errorCallback: (String?)->Unit) {
+fun deleteArticle(
+    idArticle: Long,
+    token: String,
+    articleDtoCallback: (StatusDto) -> Unit,
+    errorCallback: (String?) -> Unit
+) {
     var call: Call<StatusDto>? = ApiService.getApi().deleteCountry(idArticle, token)
 
     call?.enqueue(object : Callback<StatusDto> {

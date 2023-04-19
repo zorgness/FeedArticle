@@ -20,6 +20,7 @@ import com.example.feedarticle.dataclass.SessionDto
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import convertJsonToDto
+import getArticleById
 import getRemoteArticles
 import myToast
 
@@ -68,7 +69,6 @@ class MainActivity : AppCompatActivity(){
         }
 
         //SPINNER CONFIG
-
         ArrayAdapter.createFromResource(
             this,
             R.array.categories,
@@ -90,9 +90,11 @@ class MainActivity : AppCompatActivity(){
         val registerActivityForResult= registerForActivityResult( ActivityResultContracts.StartActivityForResult()
         ){ result -> if (result.resultCode == RESULT_OK) {
             val position = result.data?.getStringExtra(KEY_ARTICLE_POSITION)?.toInt()
-            position?.let {
-                articleAdapter.notifyItemRemoved(it)
-            } ?: sendListToAdapter()
+            if (session != null) {
+                position?.let {
+                    articleAdapter.notifyItemRemoved(it)
+                } ?: sendListToAdapter()
+            }
         }}
 
 
