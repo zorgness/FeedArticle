@@ -50,6 +50,7 @@ class DetailsActivity : AppCompatActivity() {
 
         )
 
+        //FOR DELETE
         val articlePosition = intent.getStringExtra(MainActivity.KEY_ARTICLE_POSITION)
 
         intent.getStringExtra(MainActivity.KEY_ARTICLE_ID)?.let { it ->
